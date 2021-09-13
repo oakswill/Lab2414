@@ -1,0 +1,26 @@
+#include <xc.h>
+#include <inttypes.h>
+#include "porta_in.h"
+#include "portb_out.h"
+#pragma config FNOSC = FRCPLL, POSCMOD = OFF
+#pragma config FPLLIDIV = DIV_2, FPLLMUL = MUL_20
+#pragma config FPBDIV = DIV_1, FPLLODIV = DIV_2
+#pragma config FWDTEN = OFF, JTAGEN = OFF, FSOSCEN = OFF
+
+main() {
+ uint8_t in;
+ uint16_t out;
+ porta_in_init();
+ portb_out_init();
+ while (1) {
+ in = porta_in_read();
+ 
+ if(in < 0xF ) out = ((in & 0x000F))  ;
+     
+ 
+// out = ~(in & 0x000F);
+ else out = (~(in&0x000F));
+ 
+ portb_out_write(out);
+ }
+}
