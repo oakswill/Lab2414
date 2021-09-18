@@ -15,11 +15,41 @@ main() {
  while (1) {
  in = porta_in_read();
  
- if(in < 0xF ) out = ((in & 0x000F))  ;
+  out = 0x0001;
+  int i;
+
+  for(i = in&0x000F; i >1 ; i--) {
+      out = out << 1;
+  }
+  if(in>=0x10){
+      out = ~out;
+  }
+ /**
+ if(in < 0x10 ){
+     out = 0x0001;
+     int i = 0;
+      
+     for(i = 1; i < in&0x000F; i++) {
+         out = out << 1;
+     
+     }
+     
+ 
+ } //out = ((in & 0x000F))  ;
      
  
 // out = ~(in & 0x000F);
- else out = (~(in&0x000F));
+ else {
+  out = 0x0001;
+     int i = 0;
+      
+     for(i = 1; i < in&0x000F; i++) {
+         out = out >> 1;
+     
+     }
+     out=~out;
+ }//out = (~(in&0x000F));
+  * **/
  
  portb_out_write(out);
  }
