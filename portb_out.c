@@ -1,16 +1,13 @@
-
 #include <xc.h>
 #include <inttypes.h>
 #include "portb_out.h"
-void portb_out_init() {
-    
+
+void portb_out_init(){
     ANSELB = 0;
-    TRISB = 0;
-    LATB =  0;    
+    TRISB = 0x0000;
+    LATB = 0x0000;
 }
-void portb_out_write(uint16_t val)
-{ 
-    LATB = ( ((val << 2)& 0xE000) | ((val  << 1)&0xF80) | (val & 0x3F));
-    
-    
+
+void portb_out_write(uint16_t v){
+    LATB = v&0x003F| v&0x07C0 | outval&0x1C00;
 }
