@@ -79,10 +79,10 @@ int main(int argc, char** argv) {
         //tft_drawLine(p.x-size,p.y,p.x+size,p.y,ILI9341_WHITE);
         //tft_drawLine(p.x,p.y-size,p.x,p.y+size,ILI9341_WHITE);
         
-        int y1 = 950;
-        int x1 = 200;
-        int y2 = 320;
-        int x2 = 850;
+        int y1 = 920;
+        int x1 = 140;
+        int y2 = 100;
+        int x2 = 890;
         xPos = (p.y-y1)*(239-0)/(y2-y1)+0;
         yPos = (p.x-x1)*(319-0)/(x2-x1)+0;
         

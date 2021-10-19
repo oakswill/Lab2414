@@ -24,6 +24,8 @@
       <itemPath>tft_gfx.c</itemPath>
       <itemPath>tft_master.c</itemPath>
       <itemPath>touch_main_example.c</itemPath>
+      <itemPath>calcFSM.c</itemPath>
+      <itemPath>calc_display.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -217,6 +219,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="memories.configurationmemory" value="true"/>
         <property key="memories.dataflash" value="true"/>
         <property key="memories.eeprom" value="true"/>

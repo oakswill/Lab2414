@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=adc_intf.c TouchScreen.c glcdfont.c tft_gfx.c tft_master.c touch_main_example.c
+SOURCEFILES_QUOTED_IF_SPACED=adc_intf.c TouchScreen.c glcdfont.c tft_gfx.c tft_master.c touch_main_example.c calcFSM.c calc_display.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/adc_intf.o ${OBJECTDIR}/TouchScreen.o ${OBJECTDIR}/glcdfont.o ${OBJECTDIR}/tft_gfx.o ${OBJECTDIR}/tft_master.o ${OBJECTDIR}/touch_main_example.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/adc_intf.o.d ${OBJECTDIR}/TouchScreen.o.d ${OBJECTDIR}/glcdfont.o.d ${OBJECTDIR}/tft_gfx.o.d ${OBJECTDIR}/tft_master.o.d ${OBJECTDIR}/touch_main_example.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/adc_intf.o ${OBJECTDIR}/TouchScreen.o ${OBJECTDIR}/glcdfont.o ${OBJECTDIR}/tft_gfx.o ${OBJECTDIR}/tft_master.o ${OBJECTDIR}/touch_main_example.o ${OBJECTDIR}/calcFSM.o ${OBJECTDIR}/calc_display.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/adc_intf.o.d ${OBJECTDIR}/TouchScreen.o.d ${OBJECTDIR}/glcdfont.o.d ${OBJECTDIR}/tft_gfx.o.d ${OBJECTDIR}/tft_master.o.d ${OBJECTDIR}/touch_main_example.o.d ${OBJECTDIR}/calcFSM.o.d ${OBJECTDIR}/calc_display.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/adc_intf.o ${OBJECTDIR}/TouchScreen.o ${OBJECTDIR}/glcdfont.o ${OBJECTDIR}/tft_gfx.o ${OBJECTDIR}/tft_master.o ${OBJECTDIR}/touch_main_example.o
+OBJECTFILES=${OBJECTDIR}/adc_intf.o ${OBJECTDIR}/TouchScreen.o ${OBJECTDIR}/glcdfont.o ${OBJECTDIR}/tft_gfx.o ${OBJECTDIR}/tft_master.o ${OBJECTDIR}/touch_main_example.o ${OBJECTDIR}/calcFSM.o ${OBJECTDIR}/calc_display.o
 
 # Source Files
-SOURCEFILES=adc_intf.c TouchScreen.c glcdfont.c tft_gfx.c tft_master.c touch_main_example.c
+SOURCEFILES=adc_intf.c TouchScreen.c glcdfont.c tft_gfx.c tft_master.c touch_main_example.c calcFSM.c calc_display.c
 
 
 
@@ -143,6 +143,18 @@ ${OBJECTDIR}/touch_main_example.o: touch_main_example.c  .generated_files/flags/
 	@${RM} ${OBJECTDIR}/touch_main_example.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/touch_main_example.o.d" -o ${OBJECTDIR}/touch_main_example.o touch_main_example.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
 	
+${OBJECTDIR}/calcFSM.o: calcFSM.c  .generated_files/flags/default/5a18db992daafc50928c7232001c36c4d73a79ad .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/calcFSM.o.d 
+	@${RM} ${OBJECTDIR}/calcFSM.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/calcFSM.o.d" -o ${OBJECTDIR}/calcFSM.o calcFSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
+	
+${OBJECTDIR}/calc_display.o: calc_display.c  .generated_files/flags/default/3dc669cc38e17e18f8e9c9f2336d356833464ea9 .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/calc_display.o.d 
+	@${RM} ${OBJECTDIR}/calc_display.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/calc_display.o.d" -o ${OBJECTDIR}/calc_display.o calc_display.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
+	
 else
 ${OBJECTDIR}/adc_intf.o: adc_intf.c  .generated_files/flags/default/3574a9f265e07aa2c929cc226abc33188ddbed16 .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
 	@${MKDIR} "${OBJECTDIR}" 
@@ -179,6 +191,18 @@ ${OBJECTDIR}/touch_main_example.o: touch_main_example.c  .generated_files/flags/
 	@${RM} ${OBJECTDIR}/touch_main_example.o.d 
 	@${RM} ${OBJECTDIR}/touch_main_example.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/touch_main_example.o.d" -o ${OBJECTDIR}/touch_main_example.o touch_main_example.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
+	
+${OBJECTDIR}/calcFSM.o: calcFSM.c  .generated_files/flags/default/96b740a4c4b982933fcca8f418b4f40b93e6df09 .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/calcFSM.o.d 
+	@${RM} ${OBJECTDIR}/calcFSM.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/calcFSM.o.d" -o ${OBJECTDIR}/calcFSM.o calcFSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
+	
+${OBJECTDIR}/calc_display.o: calc_display.c  .generated_files/flags/default/efe0fa08f08eecea3efcce675717357172d6e1b6 .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/calc_display.o.d 
+	@${RM} ${OBJECTDIR}/calc_display.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/calc_display.o.d" -o ${OBJECTDIR}/calc_display.o calc_display.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
 	
 endif
 
