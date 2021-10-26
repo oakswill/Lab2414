@@ -1,7 +1,5 @@
-build/default/production/calcFSM.o: calcFSM.c config.h adc_intf.h \
- TouchScreen.h tft_master.h tft_gfx.h
-
-config.h:
+build/default/production/calcFSM.o: calcFSM.c adc_intf.h TouchScreen.h \
+ tft_master.h tft_gfx.h
 
 adc_intf.h:
 

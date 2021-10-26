@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=adc_intf.c TouchScreen.c glcdfont.c tft_gfx.c tft_master.c touch_main_example.c calcFSM.c calc_display.c
+SOURCEFILES_QUOTED_IF_SPACED=adc_intf.c TouchScreen.c glcdfont.c tft_gfx.c tft_master.c touch_main_example.c calcFSM.c calc_display.c debounce.c timer1.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/adc_intf.o ${OBJECTDIR}/TouchScreen.o ${OBJECTDIR}/glcdfont.o ${OBJECTDIR}/tft_gfx.o ${OBJECTDIR}/tft_master.o ${OBJECTDIR}/touch_main_example.o ${OBJECTDIR}/calcFSM.o ${OBJECTDIR}/calc_display.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/adc_intf.o.d ${OBJECTDIR}/TouchScreen.o.d ${OBJECTDIR}/glcdfont.o.d ${OBJECTDIR}/tft_gfx.o.d ${OBJECTDIR}/tft_master.o.d ${OBJECTDIR}/touch_main_example.o.d ${OBJECTDIR}/calcFSM.o.d ${OBJECTDIR}/calc_display.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/adc_intf.o ${OBJECTDIR}/TouchScreen.o ${OBJECTDIR}/glcdfont.o ${OBJECTDIR}/tft_gfx.o ${OBJECTDIR}/tft_master.o ${OBJECTDIR}/touch_main_example.o ${OBJECTDIR}/calcFSM.o ${OBJECTDIR}/calc_display.o ${OBJECTDIR}/debounce.o ${OBJECTDIR}/timer1.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/adc_intf.o.d ${OBJECTDIR}/TouchScreen.o.d ${OBJECTDIR}/glcdfont.o.d ${OBJECTDIR}/tft_gfx.o.d ${OBJECTDIR}/tft_master.o.d ${OBJECTDIR}/touch_main_example.o.d ${OBJECTDIR}/calcFSM.o.d ${OBJECTDIR}/calc_display.o.d ${OBJECTDIR}/debounce.o.d ${OBJECTDIR}/timer1.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/adc_intf.o ${OBJECTDIR}/TouchScreen.o ${OBJECTDIR}/glcdfont.o ${OBJECTDIR}/tft_gfx.o ${OBJECTDIR}/tft_master.o ${OBJECTDIR}/touch_main_example.o ${OBJECTDIR}/calcFSM.o ${OBJECTDIR}/calc_display.o
+OBJECTFILES=${OBJECTDIR}/adc_intf.o ${OBJECTDIR}/TouchScreen.o ${OBJECTDIR}/glcdfont.o ${OBJECTDIR}/tft_gfx.o ${OBJECTDIR}/tft_master.o ${OBJECTDIR}/touch_main_example.o ${OBJECTDIR}/calcFSM.o ${OBJECTDIR}/calc_display.o ${OBJECTDIR}/debounce.o ${OBJECTDIR}/timer1.o
 
 # Source Files
-SOURCEFILES=adc_intf.c TouchScreen.c glcdfont.c tft_gfx.c tft_master.c touch_main_example.c calcFSM.c calc_display.c
+SOURCEFILES=adc_intf.c TouchScreen.c glcdfont.c tft_gfx.c tft_master.c touch_main_example.c calcFSM.c calc_display.c debounce.c timer1.c
 
 
 
@@ -155,6 +155,18 @@ ${OBJECTDIR}/calc_display.o: calc_display.c  .generated_files/flags/default/3dc6
 	@${RM} ${OBJECTDIR}/calc_display.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/calc_display.o.d" -o ${OBJECTDIR}/calc_display.o calc_display.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
 	
+${OBJECTDIR}/debounce.o: debounce.c  .generated_files/flags/default/269b15ff0e2ae78546804d1cc803f70ac324370e .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/debounce.o.d 
+	@${RM} ${OBJECTDIR}/debounce.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/debounce.o.d" -o ${OBJECTDIR}/debounce.o debounce.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
+	
+${OBJECTDIR}/timer1.o: timer1.c  .generated_files/flags/default/3b8cd7553f63bf66d35f3374340f565eca1f4c8a .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer1.o.d 
+	@${RM} ${OBJECTDIR}/timer1.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer1.o.d" -o ${OBJECTDIR}/timer1.o timer1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
+	
 else
 ${OBJECTDIR}/adc_intf.o: adc_intf.c  .generated_files/flags/default/3574a9f265e07aa2c929cc226abc33188ddbed16 .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
 	@${MKDIR} "${OBJECTDIR}" 
@@ -203,6 +215,18 @@ ${OBJECTDIR}/calc_display.o: calc_display.c  .generated_files/flags/default/efe0
 	@${RM} ${OBJECTDIR}/calc_display.o.d 
 	@${RM} ${OBJECTDIR}/calc_display.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/calc_display.o.d" -o ${OBJECTDIR}/calc_display.o calc_display.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
+	
+${OBJECTDIR}/debounce.o: debounce.c  .generated_files/flags/default/d7ae03ca177db167f6e601194fbda42f5e1e6bca .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/debounce.o.d 
+	@${RM} ${OBJECTDIR}/debounce.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/debounce.o.d" -o ${OBJECTDIR}/debounce.o debounce.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
+	
+${OBJECTDIR}/timer1.o: timer1.c  .generated_files/flags/default/5a9f79d112850a205693882628597c39dd0ff99d .generated_files/flags/default/c9ab9a848ec860c15d50c34be9dd107a6274ab00
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer1.o.d 
+	@${RM} ${OBJECTDIR}/timer1.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer1.o.d" -o ${OBJECTDIR}/timer1.o timer1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -D_SUPPRESS_PLIB_WARNING   
 	
 endif
 

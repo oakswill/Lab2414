@@ -1,6 +1,8 @@
+
+
 #include <xc.h>
 #include <plib.h>
-#include "config.h"
+
 #include "adc_intf.h"
 #include "TouchScreen.h"
 #include "tft_master.h"
@@ -19,6 +21,7 @@ int firstValEmpty=1;
 int secondValEmpty=1;
 int op=0; // 1 = + 2 = - 3 = * 4 = / 0 =blank 5 = =
 int op2 =0;
+extern char output[50];
 
 int result=0;//dont clear this gets overridden 
 int displayNum=0;
@@ -31,6 +34,8 @@ int displayed = 0;
 int isCleared = 0;
 int isError = 0;
 int errorType = 0;
+
+int i;
 //button type op = 1 number = 2 clear =3 null = 0
 //button value = 0-9 for number 1-4 for op and 0-1 for clear
 void tickFct_Calc(int buttonType, int buttonVal)
@@ -113,12 +118,32 @@ void tickFct_Calc(int buttonType, int buttonVal)
             break;
         case Display:
             if(errorType!=0){
-                if(errorType==1){char output[] = "dont divide by zero asshole";}
-                else if(errorType==2){char output[] = "why you need so many numbers";}
+                if(errorType==1){
+                    char temp[50]="dont divide by zero asshole";
+                    // output  = *temp;
+                     for(i=0; i<50; i++){
+                         output[i] = temp[i];
+                     }
+                }
+                else if(errorType==2){
+                      char temp[50]= "why you need so many numbers";
+                      for(i=0; i<50; i++){
+                         output[i] = temp[i];
+                     }
+                }
             }
-            else if (numsBeingInputted1||!firstValEmpty){char output[] = firstVal;}
-            else if (numsBeingInputted2){char output[] = secondVal;}
-            else if (!secondValEmpty){char output[] = displayNum;}
+            else if (numsBeingInputted1||!firstValEmpty){
+                char t  = (char)firstVal;
+                //need to append to output
+            }
+            else if (numsBeingInputted2){
+                 char t  = secondVal+'0';
+                 //need to append to output
+            }
+            else if (!secondValEmpty){
+                  char t  = displayNum+'0';
+                  //need to append to output
+            }
             
             break;
         case Error:
