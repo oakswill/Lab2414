@@ -1,0 +1,36 @@
+*Filename Lab5_Top.cir
+
+*Input Voltage Source
+V1ni 1ni 0 DC 0 AC 0 SIN (0 2 1KHz 0 0 0) ; can make it zero
+
+*Power supply for opamp
+V+ 3pps 0 DC 10 ; V+
+V- 4nps 0 DC -10 ; V-
+
+
+*OPAMP
+XopAmp 1ni Vrc 3pps 4nps opout LM324
+
+*Diode
+
+D_1 opout Vrc D1N4148
+
+*Rsistor
+rc Vrc Vout 200
+rd Vout 0 100K
+
+*Capacitor
+Cpeak Vout 0 0.1uF
+
+*Include card tells spice to add this file to deck
+.include LM324.sub
+.include D1N4148.mod
+
+
+
+;Transient simulation at the -3dB frequency
+.TRAN 0s 5ms 0.01us
+
+.probe
+.end
+
