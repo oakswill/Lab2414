@@ -6,13 +6,14 @@
 #include "tft_master.h"
 #include "tft_gfx.h"
 //need to finish up the ovverflow when inputting nums
+//check during the transitions set the display to error
+//go to init
 
 #define PERIOD 50
 
 int F; //<- the value of the first number
 int OP1; //<- the operation between the first and second number
 int S; //<- the value of the second number
-int OP2; //<- the operation between the second number and trailing number
 int T; //<- hold previous val
 int D; //<- what is displayed on the screen; it can be one of F, S, and T
 
@@ -29,7 +30,7 @@ boolean hasPreviousVal=false;
 
 
 static enum CALC_STATES
-{Initial,Transition,Equal,TFromInitial,TFromTransition}CALC_state;
+{Initial,Transition,Equal,FirstNum,SecondNum}CALC_state;
 
 void tickFct_Calc(int buttonType, int buttonVal)
 {
@@ -44,7 +45,7 @@ void tickFct_Calc(int buttonType, int buttonVal)
             }
             else if(buttonType==2){//if number
               F=buttonVal;
-              CALC_state==TFromInitial;
+              CALC_state==FirstNum;
             }
             else if(buttonType==1 && buttonVal!=5){//any op other then equals
               if(hasPreviousVal){
@@ -59,21 +60,27 @@ void tickFct_Calc(int buttonType, int buttonVal)
               CALC_state=Initial;
             }
             break;
-        case TFromInitial://load in first number
+        case FirstNum://load in first number
             if(buttonType==3 && buttonVal==1){//clear
               CALC_state=Initial;
             }
             else if(buttonType==1 && buttonVal==5){//equals
-              CALC_state==TFromInitial;
+              CALC_state==FirstNum;
             }
             else if(buttonType==2){//if number
-              CALC_state==TFromInitial;
+              if(F*10+buttonVal>OVERFLOW){
+                D=0;//eror mesage
+                CALC_state==Initial;
+              }
+              else{
+                CALC_state==FirstNum;
+              }
             }
             else if(buttonType==1 && buttonVal!=5){//any op other then equals
               CALC_state==Transition;
             }
             else{
-              CALC_state=TFromInitial;
+              CALC_state=FirstNum;
             }
             break;
         case Transition://first op
@@ -84,7 +91,7 @@ void tickFct_Calc(int buttonType, int buttonVal)
             CALC_state==Transition;
           }
           else if(buttonType==2){//if number
-            CALC_state==TFromTransition;
+            CALC_state==SecondNum;
           }
           else if(buttonType==1 && buttonVal!=5){//any op other then equals
             CALC_state==Transition;
@@ -93,7 +100,7 @@ void tickFct_Calc(int buttonType, int buttonVal)
             CALC_state=Transition;
           }
             break;
-        case TFromTransition://second number
+        case SecondNum://second number
             if(buttonType==3 && buttonVal==1){//clear
               CALC_state=Initial;
             }
@@ -101,13 +108,19 @@ void tickFct_Calc(int buttonType, int buttonVal)
               CALC_state==Equal;
             }
             else if(buttonType==2){//if number
-              CALC_state==TFromTransition;
+              if(F*10+buttonVal>OVERFLOW){
+                D=0;//eror mesage
+                CALC_state==Initial;
+              }
+              else{
+                CALC_state==FirstNum;
+              }
             }
             else if(buttonType==1 && buttonVal!=5){//any op other then equals
-              CALC_state==TFromTransition;
+              CALC_state==SecondNum;
             }
             else{
-              CALC_state=TFromTransition;
+              CALC_state=SecondNum;
             }
             break;
         case Equal://calculations
@@ -131,15 +144,13 @@ void tickFct_Calc(int buttonType, int buttonVal)
             //T = 0;
             D = T;
             break;
-        case TFromInitial:
+        case FirstNum:
             F=F*10+buttonVal;
             OP1=OP1;
             S=S;
             T=T;
             D=F;
             break;
-
-
         case Transition:
             F=F;
             OP1=buttonVal;
@@ -147,7 +158,7 @@ void tickFct_Calc(int buttonType, int buttonVal)
             T=T;
             D=F;
             break;
-        case TFromTransition:
+        case SecondNum:
             F=F;
             OP1=OP1;
             S=S*10+buttonVal;
@@ -168,7 +179,7 @@ void tickFct_Calc(int buttonType, int buttonVal)
             }
             else if(OP1 == 3){
               if(S==0){
-                D = 0;//error message
+                D = 0;//error message divide by zero
               }
               else{
                 T=F/S;//if no divide by 0
