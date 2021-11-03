@@ -11,5 +11,6 @@
 #define PERIOD 50ms
 
 extern void tickFct_Calc(int buttonType, int buttonVal);
-
-extern char output[50];
+extern void InitFSM_Calc();
+extern int D;
+extern int state;
