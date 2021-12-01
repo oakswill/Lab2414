@@ -1,3 +1,4 @@
+
 #include <xc.h>
 #include "ztimer.h"
 
@@ -25,7 +26,7 @@ void InitFSM_jump() {
     zTimerOn();
 }
 
-void tickFct_jump(uint8_t sensor)
+void tickFct_jump(int sensor)
 {
 
 
@@ -47,7 +48,7 @@ void tickFct_jump(uint8_t sensor)
                 maxForceJump=sensor;
             }
             if(sensor<threshhold){
-                debounce_State = debounce_JUMP;
+                debounce_State = debounce_INAIR;
                 t1 = zTimerReadms();
                 didJump=1;
             }
