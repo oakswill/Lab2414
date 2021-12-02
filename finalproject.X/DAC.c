@@ -1,3 +1,4 @@
+
 #include <plib.h>
 
 void initADC() {
@@ -14,5 +15,3 @@ void initADC() {
 
 
 }
-
-

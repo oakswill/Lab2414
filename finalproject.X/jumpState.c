@@ -1,16 +1,15 @@
-
 #include <xc.h>
 #include "ztimer.h"
+#include <inttypes.h>
 
-extern int didJump;
-extern int airTime;
-extern int maxForceLand;
-extern int maxForceJump;
-extern int didLand;
+extern int didJump=0;
+extern int airTime=0;
+extern int maxForceLand=0;
+extern int maxForceJump=0;
+extern int didLand=0;
 int threshhold = 20;
 
 uint32_t t1, t2;
-#define DEBOUNCE_PERIOD 50
 
 
 static enum debounce_States { debounce_NOTJUMP, debounce_MAYBEJUMP, debounce_INAIR, debounce_MAYBELAND, debounce_LAND } debounce_State;
@@ -86,7 +85,9 @@ void tickFct_jump(int sensor)
                 }
             }
             else{
-                debounce_State = debounce_NOTJUMP;
+                debounce_State = debounce_NOTJUMP;//when we get main working we need to only reset when given input so 
+                //stay displayinf as opposed to notjump ie stay in land until its reset then reset all the values
+                //cant do yet becuase do not have main module FSM for the lcd built up yet
             }
             break;
     }

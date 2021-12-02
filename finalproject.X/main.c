@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <inttypes.h>
 #include "DAC.h"
 #include <xc.h>
 #include <plib.h>
@@ -27,10 +28,18 @@ float v;
 char buffer[50];
 char buffer2[50];
 char buffer3[50];
-
+char buffer4[50];
+char buffer5[50];
+char buffer6[50];
+char buffer7[50];
+char buffer8[50];
+uint16_t ta1, ta2;
  
 
 int main() {
+   
+   timer1_init();
+   InitFSM_jump();
    
    configureADC();
    SYSTEMConfigPerformance(PBCLK);
@@ -40,7 +49,7 @@ int main() {
    tft_fillScreen(ILI9341_BLACK); 
    initADC();
    
-   
+    ta1 = timer1_read();
     while(1){
         output = ReadADC10(0);
         AcquireADC10();
@@ -62,10 +71,33 @@ int main() {
         sprintf(buffer3,"%d",mv);
         tft_writeString(buffer3);
         
+        ta2 = timer1_read();
+        if (timer1_ms_elapsed(ta1, ta2) > 50) {
+            tickFct_jump(mv);
+            ta1 = ta2;
+        }
         
         
+        tft_setCursor(120,100);
+        sprintf(buffer4,"%d",didJump);
+        tft_writeString(buffer4);
+        
+        tft_setCursor(120,150);
+        sprintf(buffer5,"%d",didLand);
+        tft_writeString(buffer5);
+        
+        tft_setCursor(200,100);
+        sprintf(buffer6,"%d",maxForceJump);
+        tft_writeString(buffer6);
+        
+        tft_setCursor(200,150);
+        sprintf(buffer7,"%d",airTime);
+        tft_writeString(buffer7);
+        
+        tft_setCursor(200,200);
+        sprintf(buffer8,"%d",maxForceLand);
+        tft_writeString(buffer8);
         
     }
    
 }
-
