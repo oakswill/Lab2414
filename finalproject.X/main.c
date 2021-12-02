@@ -20,11 +20,14 @@
 #include "jumpState.h"
 
 int output = 0;
+int output1 = 0;
 int mv = 0;
+int mv1 = 0;
 /*
  * 
  */
 float v;
+float v1;
 char buffer[50];
 char buffer2[50];
 char buffer3[50];
@@ -33,6 +36,7 @@ char buffer5[50];
 char buffer6[50];
 char buffer7[50];
 char buffer8[50];
+char buffer9[50];
 uint16_t ta1, ta2;
  
 
@@ -52,6 +56,7 @@ int main() {
     ta1 = timer1_read();
     while(1){
         output = ReadADC10(0);
+        output1 = ReadADC10(1);
         AcquireADC10();
         tft_fillScreen(ILI9341_BLACK); 
         
@@ -71,13 +76,17 @@ int main() {
         sprintf(buffer3,"%d",mv);
         tft_writeString(buffer3);
         
+        tft_setCursor(100,100);
+        sprintf(buffer9,"%d",output1);
+        tft_writeString(buffer9);
+        
         ta2 = timer1_read();
         if (timer1_ms_elapsed(ta1, ta2) > 50) {
             tickFct_jump(mv);
             ta1 = ta2;
         }
         
-        
+        /**
         tft_setCursor(120,100);
         sprintf(buffer4,"%d",didJump);
         tft_writeString(buffer4);
@@ -97,7 +106,7 @@ int main() {
         tft_setCursor(200,200);
         sprintf(buffer8,"%d",maxForceLand);
         tft_writeString(buffer8);
-        
+        */
     }
    
 }
