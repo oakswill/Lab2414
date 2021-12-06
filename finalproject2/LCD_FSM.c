@@ -8,6 +8,7 @@ static enum lcd_States { lcd_Select, lcd_Excercising, lcd_DisplayResults} lcd_St
 
 void InitFSM_lcd() {
   lcd_State=lcd_Select;
+  resetJumpFSM=0;
   state=1;
 }
 //button 0 = empty
@@ -22,7 +23,7 @@ void tickFct_lcd(int button, int displayable1, int displayable2){
     case lcd_Select:
       if(button==1){
         state =2;
-        resetJumpFSM=1;
+        //resetJumpFSM=1;
         lcd_State=lcd_Excercising;
       }
       else{

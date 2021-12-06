@@ -8,7 +8,7 @@ extern int maxForceLand=0;
 extern int maxForceJump=0;
 extern int didLand=0;
 extern int displayable=0;
-int threshhold = 20;
+int threshhold = 50;
 
 uint32_t t1, t2;
 

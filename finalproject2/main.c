@@ -78,12 +78,13 @@ int main() {
          p.x = 0;
          p.y = 0;
          p.z = 0;
+         
          /**
          if(state==2){
-            //AcquireADC10();
-            //initADC();//dac
-            output = readADC(9);
-            output1 = readADC(11);
+            AcquireADC10();
+            initADC();//dac
+            output = ReadADC10(0);
+            output1 = ReadADC10(1);
             
                 
             }
@@ -93,7 +94,7 @@ int main() {
             getPoint(&p);
             
         }
-          * */
+         **/
         configureADC();
         getPoint(&p);
         output = readADC(9);
@@ -169,9 +170,10 @@ int main() {
         if (timer1_ms_elapsed(ta3, ta4) > 50) {
             tickFct_lcd(button,displayable,displayable1);
             //if reset = 1 then we need to reset both jumpstate FSM's and set reset to 0
+           
             if(resetJumpFSM=1){
-                rst();
-                rst1();
+                //rst();
+                //rst1();
                 resetJumpFSM=0;
             }
             
@@ -201,20 +203,26 @@ int main() {
         
         
         tft_setCursor(100, 71);
-        sprintf(buffer4,"%d",button);
+        sprintf(buffer4,"%d",resetJumpFSM);
         tft_writeString(buffer4);
         
         tft_setCursor(200, 71);
-        sprintf(buffer3,"%d",p.y);
+        sprintf(buffer3,"%d",didLand);
         tft_writeString(buffer3);
         
         tft_setCursor(200, 110);
-        sprintf(buffer2,"%d",p.x);
+        sprintf(buffer2,"%d",didJump);
         tft_writeString(buffer2);
         
-         tft_setCursor(200, 150);
-        sprintf(buffer,"%d",p.z);
-        tft_writeString(buffer);
+      
+        
+        tft_setCursor(230, 100);
+        sprintf(buffer5,"%d",displayable);
+        tft_writeString(buffer5);
+        
+        tft_setCursor(230, 150);
+        sprintf(buffer6,"%d",displayable1);
+        tft_writeString(buffer6);
         
         if(state==1){
         tft_setTextSize(2);
