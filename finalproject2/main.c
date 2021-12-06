@@ -22,6 +22,9 @@
 #include "LCD_FSM.h"
 #include "debounce.h"
 
+#define XM AN0
+#define YP AN1
+
 int output = 0;
 int output1 = 0;
 int mv = 0;
@@ -29,6 +32,9 @@ int mv1 = 0;
 int xPos=0;
 int yPos=1;
 int button=0;
+
+
+int counter =0;
 /*
  * 
  */
@@ -53,40 +59,85 @@ int main() {
    InitFSM_jump1();
    InitFSM_lcd();
    
-   configureADC();
+   
+   
+   
+   
    SYSTEMConfigPerformance(PBCLK);
    tft_init_hw();
    tft_begin();
    tft_setRotation(3);
    tft_fillScreen(ILI9341_BLACK); 
-   initADC();
-   
+   InitFSM_debounce();
+   //initADC();//dac
     ta1 = timer1_read();
     ta3 = timer1_read();
     ta5 = timer1_read();
     while(1){
-        //touchscreen stuff
         struct TSPoint p;
-        p.x = 0;
-        p.y = 0;
-        p.z = 0;
+         p.x = 0;
+         p.y = 0;
+         p.z = 0;
+         /**
+         if(state==2){
+            //AcquireADC10();
+            //initADC();//dac
+            output = readADC(9);
+            output1 = readADC(11);
+            
+                
+            }
+        else{
+            
+            configureADC();
+            getPoint(&p);
+            
+        }
+          * */
+        configureADC();
         getPoint(&p);
+        output = readADC(9);
+        output1 = readADC(11);
+       /**
+        if(counter%2==0){
+            initADC();//dac
+            output = ReadADC10(0);
+            output1 = ReadADC10(1);
+            AcquireADC10();
+            counter++;
+        }
+        
+        else{
+            configureADC();//touchscreen
+            //touchscreen stuff
+            getPoint(&p);
+            counter++;
+        }
+        **/
         int y1 = 950;
         int x1 = 200;
         int y2 = 320;
         int x2 = 1000;
         xPos = (p.y-y1)*(239-0)/(y2-y1)+0;
         yPos = (p.x-x1)*(319-0)/(x2-x1)+0; 
+      
+        
+        
+        
         
         //sensor stuff need to establish which is left and right
-        output = ReadADC10(0);
-        output1 = ReadADC10(1);
-        AcquireADC10();
+        
         v=(float)output*3.3/1023.0*1000.0;//output in mv
         mv=(int)v;
         v1=(float)output1*3.3/1023.0*1000.0;//output in mv
         mv1=(int)v1;
         tft_fillScreen(ILI9341_BLACK); 
+        tft_setCursor(100, 110);
+        sprintf(buffer6,"%d",mv);
+        tft_writeString(buffer6);
+        tft_setCursor(100, 150);
+        sprintf(buffer7,"%d",mv1);
+        tft_writeString(buffer7);
         /**
         tft_setCursor(0,100);
         tft_setTextColor(ILI9341_WHITE);
@@ -115,9 +166,15 @@ int main() {
             ta1 = ta2;
         }
         ta4 = timer1_read();
-        if (timer1_ms_elapsed(ta3, ta4) > 200) {
+        if (timer1_ms_elapsed(ta3, ta4) > 50) {
             tickFct_lcd(button,displayable,displayable1);
-            //if reset = 1 then we need to reset both jumpstate FSM's and set reset to 0 
+            //if reset = 1 then we need to reset both jumpstate FSM's and set reset to 0
+            if(resetJumpFSM=1){
+                rst();
+                rst1();
+                resetJumpFSM=0;
+            }
+            
             ta3 = ta4;
         }
         //if statements based on which state the lcd fsm is on and what to print for each one
@@ -132,10 +189,55 @@ int main() {
                 //state3
                 //if(state3 and jump again selected) button = 2
                 //if(state3 and menu selected) button = 3
+                if(state==1&&xPos<=78&&xPos>=0&&yPos>=48&&yPos<=94){
+                    button = 1;
+                }
+                else if(state==3&&xPos<=78&&xPos>=0&&yPos>=48&&yPos<=94){
+                    button = 3;
+                }
             }
             ta5 = ta6;
         }
+        
+        
+        tft_setCursor(100, 71);
+        sprintf(buffer4,"%d",button);
+        tft_writeString(buffer4);
+        
+        tft_setCursor(200, 71);
+        sprintf(buffer3,"%d",p.y);
+        tft_writeString(buffer3);
+        
+        tft_setCursor(200, 110);
+        sprintf(buffer2,"%d",p.x);
+        tft_writeString(buffer2);
+        
+         tft_setCursor(200, 150);
+        sprintf(buffer,"%d",p.z);
+        tft_writeString(buffer);
+        
+        if(state==1){
+        tft_setTextSize(2);
+        tft_drawRoundRect(0,48,78,46,5,ILI9341_WHITE);
+        tft_setTextColor(ILI9341_WHITE);
+        tft_setCursor(39, 71);
+        tft_write('a');
+        
        
+    
+        }
+        else if(state==2){
+            tft_drawRoundRect(0,48,78,46,5,ILI9341_WHITE);
+            tft_setTextColor(ILI9341_WHITE);
+            tft_setCursor(39, 71);
+            tft_write('b');
+        }
+        else if(state==3){
+            tft_drawRoundRect(0,48,78,46,5,ILI9341_WHITE);
+            tft_setTextColor(ILI9341_WHITE);
+            tft_setCursor(39, 71);
+            tft_write('c');
+        }
         /**
         tft_setCursor(120,100);
         sprintf(buffer4,"%d",didJump);
