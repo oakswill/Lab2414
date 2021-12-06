@@ -2,12 +2,12 @@
 #include "ztimer.h"
 #include <inttypes.h>
 
-extern int didJump=0;
-extern int airTime=0;
-extern int maxForceLand=0;
-extern int maxForceJump=0;
-extern int didLand=0;
-extern int displayable=0;
+extern int didJump1=0;
+extern int airTime1=0;
+extern int maxForceLand1=0;
+extern int maxForceJump1=0;
+extern int didLand1=0;
+extern int displayable1=0;
 int threshhold = 20;
 
 uint32_t t1, t2;
@@ -16,36 +16,36 @@ uint32_t t1, t2;
 static enum debounce_States { debounce_NOTJUMP, debounce_MAYBEJUMP, debounce_INAIR, debounce_MAYBELAND, debounce_LAND } debounce_State;
 
 
-void InitFSM_jump() {
+void InitFSM_jump1() {
     debounce_State = debounce_NOTJUMP;
-    didJump = 0;
-    airTime = 0;
-    maxForceLand = 0;
-    maxForceJump = 0;
-    didLand = 0;
-    displayable=0;
+    didJump1 = 0;
+    airTime1 = 0;
+    maxForceLand1 = 0;
+    maxForceJump1 = 0;
+    didLand1 = 0;
+    displayable1=0;
     zTimerOn();
 }
 
-void rst() {
+void rst1() {
     debounce_State = debounce_NOTJUMP;
-    didJump = 0;
-    airTime = 0;
-    maxForceLand = 0;
-    maxForceJump = 0;
-    didLand = 0;
-    displayable=0;
+    didJump1 = 0;
+    airTime1 = 0;
+    maxForceLand1 = 0;
+    maxForceJump1 = 0;
+    didLand1 = 0;
+    displayable1=0;
 }
 
-void tickFct_jump(int sensor)
+void tickFct_jump1(int sensor)
 {
 
 
 
     switch (debounce_State) {
         case debounce_NOTJUMP:
-            if(sensor>maxForceJump){
-                maxForceJump=sensor;
+            if(sensor>maxForceJump1){
+                maxForceJump1=sensor;
             }
             if(sensor<threshhold){
                 debounce_State = debounce_MAYBEJUMP;
@@ -55,13 +55,13 @@ void tickFct_jump(int sensor)
             }
             break;
         case debounce_MAYBEJUMP:
-            if(sensor>maxForceJump){
-                maxForceJump=sensor;
+            if(sensor>maxForceJump1){
+                maxForceJump1=sensor;
             }
             if(sensor<threshhold){
                 debounce_State = debounce_INAIR;
                 t1 = zTimerReadms();
-                didJump=1;
+                didJump1=1;
             }
             else{
                 debounce_State = debounce_NOTJUMP;
@@ -78,11 +78,11 @@ void tickFct_jump(int sensor)
         case debounce_MAYBELAND:
             if(sensor>threshhold){
                 debounce_State = debounce_LAND;
-                airTime = zTimerReadms()-t1;
+                airTime1 = zTimerReadms()-t1;
                 t2=zTimerReadms();
-                didLand=1;
-                if(sensor>maxForceLand){
-                    maxForceLand=sensor;
+                didLand1=1;
+                if(sensor>maxForceLand1){
+                    maxForceLand1=sensor;
                 }
             }
             else{
@@ -92,13 +92,13 @@ void tickFct_jump(int sensor)
         case debounce_LAND:
             if(zTimerReadms()-t2<1000){
                 debounce_State = debounce_LAND;
-                if(sensor>maxForceLand){
-                    maxForceLand=sensor;
+                if(sensor>maxForceLand1){
+                    maxForceLand1=sensor;
                 }
             }
             else{
                 debounce_State = debounce_NOTJUMP;
-                displayable=1;//when we get main working we need to only reset when given input so 
+                displayable1=1;//when we get main working we need to only reset when given input so 
                 //stay displayinf as opposed to notjump ie stay in land until its reset then reset all the values
                 //cant do yet becuase do not have main module FSM for the lcd built up yet
             }
@@ -122,3 +122,4 @@ void tickFct_jump(int sensor)
                 break;
         }
 }
+
