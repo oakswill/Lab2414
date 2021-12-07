@@ -255,11 +255,11 @@ int main() {
             tft_writeString("PI PHI GIVES YOU WINGS");
         }
         else if(state==3){
-            tft_drawRoundRect(0,0,100,50,5,ILI9341_WHITE);
-            tft_setTextColor(ILI9341_WHITE);
+            //tft_drawRoundRect(0,0,100,50,5,ILI9341_WHITE);
+            //tft_setTextColor(ILI9341_WHITE);
             tft_setTextSize(2);
-            tft_setCursor(20, 20);
-            tft_writeString("Again");
+            //tft_setCursor(20, 20);
+            //tft_writeString("Again");
             
             tft_drawRoundRect(219,0,100,50,5,ILI9341_WHITE);
             tft_setCursor(239, 20);
@@ -309,6 +309,9 @@ int main() {
             tft_writeString("Symmetry Analysis:");
             
             sym = (maxForceJump*1.0/maxForceJump1*1.0 * 100.0 + airTime*1.0/airTime1*1.0 * 100.0 + maxForceLand*1.0/maxForceLand1*1.0 * 100.0)/3.0 ;
+            if(sym>100){
+                sym=(maxForceJump1*1.0/maxForceJump*1.0 * 100.0 + airTime1*1.0/airTime*1.0 * 100.0 + maxForceLand1*1.0/maxForceLand*1.0 * 100.0)/3.0;
+            }
             sprintf(buffer7,"%d",sym);
             tft_writeString(buffer7);
             tft_writeString("%");
