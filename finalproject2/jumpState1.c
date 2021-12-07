@@ -8,7 +8,7 @@ extern int maxForceLand1=0;
 extern int maxForceJump1=0;
 extern int didLand1=0;
 extern int displayable1=0;
-int threshhold = 50;
+int threshhold = 80;
 
 uint32_t t1, t2;
 
@@ -97,7 +97,7 @@ void tickFct_jump1(int sensor)
                 }
             }
             else{
-                debounce_State = debounce_NOTJUMP;
+                debounce_State = debounce_LAND;
                 displayable1=1;//when we get main working we need to only reset when given input so 
                 //stay displayinf as opposed to notjump ie stay in land until its reset then reset all the values
                 //cant do yet becuase do not have main module FSM for the lcd built up yet

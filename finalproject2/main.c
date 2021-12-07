@@ -33,6 +33,8 @@ int xPos=0;
 int yPos=1;
 int button=0;
 
+int sym=0;
+
 
 int counter =0;
 /*
@@ -132,13 +134,13 @@ int main() {
         mv=(int)v;
         v1=(float)output1*3.3/1023.0*1000.0;//output in mv
         mv1=(int)v1;
+        
+        
+        
         tft_fillScreen(ILI9341_BLACK); 
-        tft_setCursor(100, 110);
-        sprintf(buffer6,"%d",mv);
-        tft_writeString(buffer6);
-        tft_setCursor(100, 150);
-        sprintf(buffer7,"%d",mv1);
-        tft_writeString(buffer7);
+        
+        
+
         /**
         tft_setCursor(0,100);
         tft_setTextColor(ILI9341_WHITE);
@@ -168,22 +170,24 @@ int main() {
         }
         ta4 = timer1_read();
         if (timer1_ms_elapsed(ta3, ta4) > 50) {
-            tickFct_lcd(button,displayable,displayable1);
+            //tickFct_lcd(button,displayable,displayable1);
+            tickFct_lcd(button);
             //if reset = 1 then we need to reset both jumpstate FSM's and set reset to 0
-           
+           /**
             if(resetJumpFSM=1){
                 //rst();
                 //rst1();
                 resetJumpFSM=0;
             }
-            
+            **/
             ta3 = ta4;
         }
         //if statements based on which state the lcd fsm is on and what to print for each one
         
         ta6 = timer1_read();
-        if (timer1_ms_elapsed(ta5, ta6) > 200) {
+        if (timer1_ms_elapsed(ta5, ta6) > 50) {
             tickFct_debounce(p.z);
+            button=0;
             if(DebouncedKeyPress=1){
                 //state1
                 //if(state1 and jump selected) button = 1
@@ -191,21 +195,23 @@ int main() {
                 //state3
                 //if(state3 and jump again selected) button = 2
                 //if(state3 and menu selected) button = 3
-                if(state==1&&xPos<=78&&xPos>=0&&yPos>=48&&yPos<=94){
+                if(state==1&&xPos<=210&&xPos>=110&&yPos>=70&&yPos<=170){
                     button = 1;
                 }
-                else if(state==3&&xPos<=78&&xPos>=0&&yPos>=48&&yPos<=94){
+                else if(state==3&&xPos<=319&&xPos>=219&&yPos>=0&&yPos<=50){
                     button = 3;
                 }
+                else if(state==3&&xPos<=100&&xPos>=0&&yPos>=0&&yPos<=50){
+                    //button=2;
+                }
             }
+            else{button=0;}
             ta5 = ta6;
         }
         
         
-        tft_setCursor(100, 71);
-        sprintf(buffer4,"%d",resetJumpFSM);
-        tft_writeString(buffer4);
         
+       /** 
         tft_setCursor(200, 71);
         sprintf(buffer3,"%d",didLand);
         tft_writeString(buffer3);
@@ -223,28 +229,92 @@ int main() {
         tft_setCursor(230, 150);
         sprintf(buffer6,"%d",displayable1);
         tft_writeString(buffer6);
-        
+        **/
         if(state==1){
         tft_setTextSize(2);
-        tft_drawRoundRect(0,48,78,46,5,ILI9341_WHITE);
+        tft_drawRoundRect(110,70,100,100,5,ILI9341_WHITE);
         tft_setTextColor(ILI9341_WHITE);
-        tft_setCursor(39, 71);
-        tft_write('a');
+        tft_setCursor(135, 110);
+        tft_writeString("Jump");
+        tft_setCursor(39, 21);
+        tft_writeString("Exercise Selection");
+        
+        tft_setCursor(20, 200);
+        tft_writeString("Not Made for Epileptics");
         
        
     
         }
         else if(state==2){
-            tft_drawRoundRect(0,48,78,46,5,ILI9341_WHITE);
+            //tft_drawRoundRect(0,48,78,46,5,ILI9341_WHITE);
             tft_setTextColor(ILI9341_WHITE);
-            tft_setCursor(39, 71);
-            tft_write('b');
+            tft_setTextSize(2.5);
+            tft_setCursor(30, 80);
+            tft_writeString("YOU CAN DO IT JUMP");
+            tft_setCursor(20, 120);
+            tft_writeString("PI PHI GIVES YOU WINGS");
         }
         else if(state==3){
-            tft_drawRoundRect(0,48,78,46,5,ILI9341_WHITE);
+            tft_drawRoundRect(0,0,100,50,5,ILI9341_WHITE);
             tft_setTextColor(ILI9341_WHITE);
-            tft_setCursor(39, 71);
-            tft_write('c');
+            tft_setTextSize(2);
+            tft_setCursor(20, 20);
+            tft_writeString("Again");
+            
+            tft_drawRoundRect(219,0,100,50,5,ILI9341_WHITE);
+            tft_setCursor(239, 20);
+            tft_writeString("Menu");
+            
+            //row labels
+            tft_setCursor(0, 135);
+            tft_writeString("Left");
+            
+            tft_setCursor(0, 95);
+            tft_writeString("Right");
+            //col labels
+            tft_setCursor(75, 55);
+            tft_writeString("Jump");
+            
+            tft_setCursor(145, 55);
+            tft_writeString("AirTime");
+            
+            tft_setCursor(250, 55);
+            tft_writeString("Land");
+            
+            tft_setCursor(75, 95);
+            sprintf(buffer,"%d",maxForceJump);
+            tft_writeString(buffer);
+            
+            tft_setCursor(145, 95);
+            sprintf(buffer2,"%d",airTime);
+            tft_writeString(buffer2);
+            
+            tft_setCursor(250, 95);
+            sprintf(buffer3,"%d",maxForceLand);
+            tft_writeString(buffer3);
+            
+            tft_setCursor(75, 135);
+            sprintf(buffer4,"%d",maxForceJump1);
+            tft_writeString(buffer4);
+            
+            tft_setCursor(145, 135);
+            sprintf(buffer5,"%d",airTime1);
+            tft_writeString(buffer5);
+            
+            tft_setCursor(250, 135);
+            sprintf(buffer6,"%d",maxForceLand1);
+            tft_writeString(buffer6);
+            
+            tft_setCursor(0, 200);
+            tft_writeString("Symmetry Analysis:");
+            
+            sym = (maxForceJump*1.0/maxForceJump1*1.0 * 100.0 + airTime*1.0/airTime1*1.0 * 100.0 + maxForceLand*1.0/maxForceLand1*1.0 * 100.0)/3.0 ;
+            sprintf(buffer7,"%d",sym);
+            tft_writeString(buffer7);
+            tft_writeString("%");
+            
+            
+            
         }
         /**
         tft_setCursor(120,100);
