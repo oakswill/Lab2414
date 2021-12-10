@@ -69,7 +69,7 @@ int main() {
    tft_init_hw();
    tft_begin();
    tft_setRotation(3);
-   tft_fillScreen(ILI9341_BLACK); 
+   //tft_fillScreen(ILI9341_BLACK); 
    InitFSM_debounce();
    //initADC();//dac
     ta1 = timer1_read();
@@ -137,7 +137,7 @@ int main() {
         
         
         
-        tft_fillScreen(ILI9341_BLACK); 
+        //tft_fillScreen(ILI9341_BLACK); 
         
         
 
@@ -230,94 +230,98 @@ int main() {
         sprintf(buffer6,"%d",displayable1);
         tft_writeString(buffer6);
         **/
-        if(state==1){
-        tft_setTextSize(2);
-        tft_drawRoundRect(110,70,100,100,5,ILI9341_WHITE);
-        tft_setTextColor(ILI9341_WHITE);
-        tft_setCursor(135, 110);
-        tft_writeString("Jump");
-        tft_setCursor(39, 21);
-        tft_writeString("Exercise Selection");
-        
-        tft_setCursor(20, 200);
-        tft_writeString("Not Made for Epileptics");
-        
-       
-    
-        }
-        else if(state==2){
-            //tft_drawRoundRect(0,48,78,46,5,ILI9341_WHITE);
-            tft_setTextColor(ILI9341_WHITE);
-            tft_setTextSize(2.5);
-            tft_setCursor(30, 80);
-            tft_writeString("YOU CAN DO IT JUMP");
-            tft_setCursor(20, 120);
-            tft_writeString("PI PHI GIVES YOU WINGS");
-        }
-        else if(state==3){
-            //tft_drawRoundRect(0,0,100,50,5,ILI9341_WHITE);
-            //tft_setTextColor(ILI9341_WHITE);
-            tft_setTextSize(2);
-            //tft_setCursor(20, 20);
-            //tft_writeString("Again");
-            
-            tft_drawRoundRect(219,0,100,50,5,ILI9341_WHITE);
-            tft_setCursor(239, 20);
-            tft_writeString("Menu");
-            
-            //row labels
-            tft_setCursor(0, 135);
-            tft_writeString("Left");
-            
-            tft_setCursor(0, 95);
-            tft_writeString("Right");
-            //col labels
-            tft_setCursor(75, 55);
-            tft_writeString("Jump");
-            
-            tft_setCursor(145, 55);
-            tft_writeString("AirTime");
-            
-            tft_setCursor(250, 55);
-            tft_writeString("Land");
-            
-            tft_setCursor(75, 95);
-            sprintf(buffer,"%d",maxForceJump);
-            tft_writeString(buffer);
-            
-            tft_setCursor(145, 95);
-            sprintf(buffer2,"%d",airTime);
-            tft_writeString(buffer2);
-            
-            tft_setCursor(250, 95);
-            sprintf(buffer3,"%d",maxForceLand);
-            tft_writeString(buffer3);
-            
-            tft_setCursor(75, 135);
-            sprintf(buffer4,"%d",maxForceJump1);
-            tft_writeString(buffer4);
-            
-            tft_setCursor(145, 135);
-            sprintf(buffer5,"%d",airTime1);
-            tft_writeString(buffer5);
-            
-            tft_setCursor(250, 135);
-            sprintf(buffer6,"%d",maxForceLand1);
-            tft_writeString(buffer6);
-            
-            tft_setCursor(0, 200);
-            tft_writeString("Symmetry Analysis:");
-            
-            sym = (maxForceJump*1.0/maxForceJump1*1.0 * 100.0 + airTime*1.0/airTime1*1.0 * 100.0 + maxForceLand*1.0/maxForceLand1*1.0 * 100.0)/3.0 ;
-            if(sym>100){
-                sym=(maxForceJump1*1.0/maxForceJump*1.0 * 100.0 + airTime1*1.0/airTime*1.0 * 100.0 + maxForceLand1*1.0/maxForceLand*1.0 * 100.0)/3.0;
+        if(updateScreen){
+            tft_fillScreen(ILI9341_BLACK); 
+            if(state==1){
+                tft_setTextSize(2);
+                tft_drawRoundRect(110,70,100,100,5,ILI9341_WHITE);
+                tft_setTextColor(ILI9341_WHITE);
+                tft_setCursor(135, 110);
+                tft_writeString("Jump");
+                tft_setCursor(50, 21);
+                tft_writeString("Exercise Selection");
+
+                tft_setCursor(55, 200);
+                tft_writeString("Test Your Prowess");
+
+
+
             }
-            sprintf(buffer7,"%d",sym);
-            tft_writeString(buffer7);
-            tft_writeString("%");
-            
-            
-            
+            else if(state==2){
+                //tft_drawRoundRect(0,48,78,46,5,ILI9341_WHITE);
+                tft_setTextColor(ILI9341_WHITE);
+                tft_setTextSize(2.5);
+                tft_setCursor(30, 80);
+                tft_writeString("YOU CAN DO IT JUMP");
+                tft_setCursor(20, 120);
+                tft_writeString("PI PHI GIVES YOU WINGS");
+            }
+            else if(state==3){
+                //tft_drawRoundRect(0,0,100,50,5,ILI9341_WHITE);
+                //tft_setTextColor(ILI9341_WHITE);
+                tft_setTextSize(2);
+                //tft_setCursor(20, 20);
+                //tft_writeString("Again");
+
+                tft_drawRoundRect(219,0,100,50,5,ILI9341_WHITE);
+                tft_setCursor(239, 20);
+                tft_writeString("Menu");
+
+                //row labels
+                tft_setCursor(0, 135);
+                tft_writeString("Left");
+
+                tft_setCursor(0, 95);
+                tft_writeString("Right");
+                //col labels
+                tft_setCursor(75, 55);
+                tft_writeString("Jump");
+
+                tft_setCursor(145, 55);
+                tft_writeString("AirTime");
+
+                tft_setCursor(250, 55);
+                tft_writeString("Land");
+
+                tft_setCursor(75, 95);
+                sprintf(buffer,"%d",maxForceJump);
+                tft_writeString(buffer);
+
+                tft_setCursor(145, 95);
+                sprintf(buffer2,"%d",airTime);
+                tft_writeString(buffer2);
+
+                tft_setCursor(250, 95);
+                sprintf(buffer3,"%d",maxForceLand);
+                tft_writeString(buffer3);
+
+                tft_setCursor(75, 135);
+                sprintf(buffer4,"%d",maxForceJump1);
+                tft_writeString(buffer4);
+
+                tft_setCursor(145, 135);
+                sprintf(buffer5,"%d",airTime1);
+                tft_writeString(buffer5);
+
+                tft_setCursor(250, 135);
+                sprintf(buffer6,"%d",maxForceLand1);
+                tft_writeString(buffer6);
+
+                tft_setCursor(0, 200);
+                tft_writeString("Symmetry Analysis:");
+
+                sym = (maxForceJump*1.0/maxForceJump1*1.0 * 100.0 + airTime*1.0/airTime1*1.0 * 100.0 + maxForceLand*1.0/maxForceLand1*1.0 * 100.0)/3.0 ;
+                if(sym>100){
+                    sym=(maxForceJump1*1.0/maxForceJump*1.0 * 100.0 + airTime1*1.0/airTime*1.0 * 100.0 + maxForceLand1*1.0/maxForceLand*1.0 * 100.0)/3.0;
+                }
+                sprintf(buffer7,"%d",sym);
+                tft_writeString(buffer7);
+                tft_writeString("%");
+
+
+
+            }
+            updateScreen=0;
         }
         /**
         tft_setCursor(120,100);

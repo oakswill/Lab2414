@@ -5,6 +5,7 @@
 
 extern int state=0;
 extern int resetJumpFSM=0;
+extern int updateScreen=0;
 
 static enum lcd_States { lcd_Select, lcd_Excercising, lcd_DisplayResults} lcd_State;
 
@@ -12,6 +13,7 @@ void InitFSM_lcd() {
   lcd_State=lcd_Select;
   resetJumpFSM=0;
   state=1;
+  updateScreen=1;
 }
 //button 0 = empty
 //button 1 = jump
@@ -28,6 +30,7 @@ void tickFct_lcd(int button){
         //resetJumpFSM=1;
         rst();
         rst1();
+        updateScreen=1;
         lcd_State=lcd_Excercising;
       }
       else{
@@ -37,6 +40,7 @@ void tickFct_lcd(int button){
     case lcd_Excercising:
       if(displayable1&&displayable){
         state=3;
+        updateScreen=1;
         lcd_State=lcd_DisplayResults;
       }
       else{
@@ -53,6 +57,7 @@ void tickFct_lcd(int button){
       }
       else if(button==3){
         state =1;
+        updateScreen=1;
         rst();
         rst1();
         lcd_State=lcd_Select;

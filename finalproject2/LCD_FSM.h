@@ -10,5 +10,6 @@ extern void tickFct_lcd(int button);
 
 extern int state;
 extern int resetJumpFSM;
+extern int updateScreen;
 
 #endif
