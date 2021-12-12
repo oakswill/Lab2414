@@ -153,15 +153,18 @@ int main() {
         sprintf(buffer2,"%f",v);
         tft_writeString(buffer2);
         
-       // m
+       
+        tft_setTextSize(2);
+        tft_fillScreen(ILI9341_BLACK);
+        tft_setTextColor(ILI9341_WHITE);
         tft_setCursor(0,200);
         sprintf(buffer3,"%d",mv);
         tft_writeString(buffer3);
         
         tft_setCursor(100,100);
-        sprintf(buffer9,"%d",output1);
+        sprintf(buffer9,"%d",mv1);
         tft_writeString(buffer9);
-        **/
+        */
         ta2 = timer1_read();
         if (timer1_ms_elapsed(ta1, ta2) > 50) {
             tickFct_jump(mv);
