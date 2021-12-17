@@ -30,10 +30,10 @@ int main(int argc, char** argv) {
      uart1_init(9600);
       initCapture();
         uint16_t a;      
-   oc1_init_plib(2000);
+   oc1_init_plib(1000);
    while(1) {
     a = ic1_getperiod();
-    oc1_setduty_plib(1000);
+   
     tft_fillScreen(ILI9341_BLACK);  
     tft_setTextColor(ILI9341_WHITE);
     tft_setCursor(0, 10);
